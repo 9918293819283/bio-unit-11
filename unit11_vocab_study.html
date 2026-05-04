@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 11 — Human Body Vocabulary</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --surface3: #22222f;
+    --ink: #e8e4f0;
+    --ink2: #9890b0;
+    --ink3: #5a5470;
+    --accent: #8b5cf6;
+    --accent-dim: rgba(139,92,246,0.15);
+    --accent-glow: rgba(139,92,246,0.3);
+    --accent2: #06d6a0;
+    --accent2-dim: rgba(6,214,160,0.12);
+    --accent3: #f72585;
+    --border: rgba(139,92,246,0.15);
+    --border2: rgba(139,92,246,0.06);
+    --border-dim: rgba(255,255,255,0.05);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(139,92,246,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6,214,160,0.05) 0%, transparent 50%),
+      linear-gradient(rgba(139,92,246,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,92,246,0.04) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* Header */
+  header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .header-top { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .unit-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(139,92,246,0.3);
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .subtitle { font-size: 13px; color: var(--ink3); margin-top: .5rem; font-weight: 300; letter-spacing: .03em; }
+
+  /* Controls bar */
+  .controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  select {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--ink2);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238b5cf6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+    min-width: 200px;
+    transition: border-color .2s, color .2s;
+  }
+  select:hover { border-color: var(--accent); color: var(--ink); }
+  select:focus { outline: none; border-color: var(--accent); color: var(--ink); }
+  select option { background: #1a1a24; }
+
+  .mode-tabs { display: flex; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .mode-tab {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    background: var(--surface);
+    color: var(--ink3);
+    border: none;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .mode-tab:not(:last-child) { border-right: 1px solid var(--border); }
+  .mode-tab.active { background: var(--accent-dim); color: var(--accent); }
+  .mode-tab:hover:not(.active) { background: var(--surface2); color: var(--ink2); }
+
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--ink2);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .btn:hover { border-color: var(--accent); background: var(--surface2); color: var(--ink); }
+  .btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 500; }
+  .btn.accent:hover { background: #7c3aed; border-color: #7c3aed; }
+  .btn.teal { background: var(--accent2-dim); color: var(--accent2); border-color: rgba(6,214,160,0.3); }
+  .btn.teal:hover { background: rgba(6,214,160,0.2); }
+
+  /* Stats row */
+  .stats {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .stat {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    border: 1px solid var(--border-dim);
+    background: var(--surface);
+    color: var(--ink3);
+  }
+  .stat.green { border-color: rgba(6,214,160,.25); background: var(--accent2-dim); color: var(--accent2); }
+  .stat.red { border-color: rgba(247,37,133,.25); background: rgba(247,37,133,.08); color: var(--accent3); }
+  .progress-bar-wrap { flex: 1; min-width: 100px; height: 2px; background: var(--surface3); border-radius: 1px; overflow: hidden; }
+  .progress-bar { height: 100%; background: var(--accent); border-radius: 1px; transition: width .4s cubic-bezier(.4,0,.2,1); }
+
+  /* Card area */
+  #cardArea { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+
+  /* Flashcard */
+  .flashcard-scene { width: 100%; max-width: 640px; perspective: 1400px; cursor: pointer; }
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    min-height: 240px;
+    transform-style: preserve-3d;
+    transition: transform .6s cubic-bezier(.4,0,.2,1);
+  }
+  .flashcard-scene.flipped .flashcard-inner { transform: rotateY(180deg); }
+  .flashcard-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: border-color .2s;
+  }
+  .flashcard-scene:hover .flashcard-face { border-color: rgba(139,92,246,0.35); }
+  .flashcard-back {
+    transform: rotateY(180deg);
+    background: var(--surface2);
+    border-color: rgba(139,92,246,0.25);
+  }
+  .card-unit-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: .75rem;
+  }
+  .flashcard-back .card-unit-tag { color: rgba(139,92,246,.5); }
+  .card-term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .card-def {
+    font-size: 15px;
+    line-height: 1.75;
+    font-weight: 300;
+    color: var(--ink2);
+    max-width: 480px;
+  }
+  .flip-hint {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .flip-hint svg { width: 14px; height: 14px; opacity: .4; }
+
+  /* Result buttons */
+  .result-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 640px;
+    animation: fadeUp .2s ease;
+  }
+  .result-row .btn { flex: 1; font-size: 14px; padding: 10px; text-align: center; }
+
+  /* Nav row */
+  .nav-row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 640px;
+  }
+  .nav-row .btn { font-size: 13px; }
+
+  /* Multiple choice */
+  .mc-card {
+    width: 100%;
+    max-width: 640px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .mc-term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 600;
+    margin-bottom: .5rem;
+    color: var(--ink);
+  }
+  .mc-unit-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 1.5rem;
+  }
+  .mc-opts { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 640px; }
+  .mc-opt {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    text-align: left;
+    padding: 12px 16px;
+    border: 1px solid var(--border-dim);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--ink2);
+    cursor: pointer;
+    transition: all .15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .mc-opt:hover:not(:disabled) { border-color: var(--accent); background: var(--surface2); color: var(--ink); }
+  .mc-opt .opt-letter {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--ink3);
+    min-width: 18px;
+    padding-top: 2px;
+  }
+  .mc-opt.correct { border-color: rgba(6,214,160,.4); background: var(--accent2-dim); color: var(--accent2); }
+  .mc-opt.correct .opt-letter { color: var(--accent2); }
+  .mc-opt.wrong { border-color: rgba(247,37,133,.4); background: rgba(247,37,133,.08); color: var(--accent3); }
+  .mc-opt.wrong .opt-letter { color: var(--accent3); }
+
+  /* Summary */
+  .summary {
+    width: 100%;
+    max-width: 640px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 3rem 2rem;
+    text-align: center;
+    animation: fadeUp .3s ease;
+  }
+  .summary-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .summary-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: .5rem;
+  }
+  .summary-sub { font-size: 14px; color: var(--ink3); font-weight: 300; margin-bottom: 2rem; }
+  .summary-bar-wrap { max-width: 260px; margin: 0 auto 2rem; }
+  .summary-bar-bg { height: 2px; background: var(--surface3); border-radius: 1px; overflow: hidden; }
+  .summary-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 1px; }
+  .summary-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  /* Browse mode */
+  .browse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 8px;
+    width: 100%;
+    animation: fadeUp .2s ease;
+  }
+  .browse-item {
+    background: var(--surface);
+    border: 1px solid var(--border-dim);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    transition: border-color .2s, background .2s;
+  }
+  .browse-item:hover { border-color: var(--accent); background: var(--surface2); }
+  .browse-term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .browse-def { font-size: 12px; color: var(--ink3); line-height: 1.65; font-weight: 300; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <header>
+    <div class="header-top">
+      <span class="unit-label">Unit 11</span>
+      <h1>Human Body</h1>
+    </div>
+    <p class="subtitle">Vocabulary study tool — flashcards, multiple choice, and browse</p>
+  </header>
+
+  <div class="controls">
+    <select id="unitSel"></select>
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="flash">Flashcards</button>
+      <button class="mode-tab" data-mode="mc">Quiz</button>
+      <button class="mode-tab" data-mode="browse">Browse</button>
+    </div>
+    <button class="btn" id="shuffleBtn">Shuffle</button>
+  </div>
+
+  <div class="stats" id="statsRow">
+    <span class="stat" id="progStat">1 / 28</span>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+    <span class="stat green" id="gotStat">✓ 0</span>
+    <span class="stat red" id="missStat">↺ 0</span>
+  </div>
+
+  <div id="cardArea"></div>
+</div>
+
+<script>
+const ALL = {
+  "Body Systems":[
+    ["Tissue","A group of similar cells working together to perform a specific function."],
+    ["Organ","A structure made of two or more tissue types that performs a specific function."],
+    ["Organ System","A group of organs that work together to perform major body functions."],
+    ["Epithelial Tissue","Tissue that covers body surfaces, lines cavities, and forms glands."],
+    ["Simple/Stratified Cuboidal Cells","Epithelial cells that are cube-shaped; simple = one layer, stratified = multiple layers."],
+    ["Simple/Stratified Columnar Cells","Tall, column-shaped epithelial cells; found lining the digestive tract and respiratory passages."],
+    ["Simple/Stratified Squamous Cells","Flat, scale-like epithelial cells; form skin surface and line body cavities."],
+    ["Connective Tissue","Tissue that supports, connects, or separates other tissues and organs."],
+    ["Blood","Fluid connective tissue that transports nutrients, gases, and wastes through the body."],
+    ["Adipose Tissue","Connective tissue that stores fat for energy, insulation, and cushioning."],
+    ["Cartilage","Flexible connective tissue that cushions joints and supports structures like the nose and ears."],
+    ["Nervous Tissue","Tissue made of neurons and support cells that transmits electrical signals."],
+    ["Cell Body","The main part of a neuron containing the nucleus."],
+    ["Axon","A long fiber extending from the neuron cell body that carries signals away from it."],
+    ["Dendrites","Short branched extensions of a neuron that receive incoming signals."],
+    ["Axon Terminal","The end of an axon that releases neurotransmitters into a synapse."],
+    ["Muscle Tissue","Tissue specialized to contract, producing movement."],
+    ["Skeletal Muscle","Voluntary, striated muscle attached to bones."],
+    ["Smooth Muscle","Involuntary muscle found in walls of organs like the stomach and intestines."],
+    ["Cardiac Muscle","Involuntary, striated muscle found only in the heart."],
+    ["Body Cavities","Spaces within the body that house and protect internal organs."],
+    ["Dorsal Body Cavity","The cavity at the back of the body housing the brain and spinal cord."],
+    ["Thoracic Body Cavity","The chest cavity containing the heart and lungs."],
+    ["Abdominal Body Cavity","The cavity below the diaphragm housing digestive organs."],
+    ["Pelvic Body Cavity","The lower cavity housing the bladder, reproductive organs, and rectum."],
+    ["Homeostasis","The body's ability to maintain stable internal conditions."],
+    ["Positive Feedback Loop","A feedback mechanism that amplifies a change away from the set point."],
+    ["Negative Feedback Loop","A feedback mechanism that reverses a change to restore the set point."]
+  ],
+  "Digestive & Urinary":[
+    ["Alimentary Canal","The continuous tube from mouth to anus through which food travels."],
+    ["Accessory Structures","Organs that aid digestion but are not part of the alimentary canal (e.g., liver, pancreas)."],
+    ["Ingestion","The process of taking food into the mouth."],
+    ["Digestion","The mechanical and chemical breakdown of food into smaller molecules."],
+    ["Absorption","The uptake of digested nutrients into the bloodstream or lymph."],
+    ["Assimilation","The incorporation of absorbed nutrients into body cells and tissues."],
+    ["Elimination","The removal of undigested waste from the body."],
+    ["Salivary Glands","Glands in the mouth that produce saliva containing amylase."],
+    ["Amylase","An enzyme in saliva (and pancreatic juice) that breaks down starch into sugars."],
+    ["Bolus","A rounded mass of chewed food moistened with saliva, ready to swallow."],
+    ["Pharynx","The throat; passage shared by the digestive and respiratory systems."],
+    ["Epiglottis","A flap that covers the trachea during swallowing to prevent food from entering the airway."],
+    ["Trachea","The windpipe; a tube that carries air to the lungs."],
+    ["Esophagus","The muscular tube carrying food from the pharynx to the stomach."],
+    ["Peristalsis","Wave-like muscular contractions that move food through the digestive tract."],
+    ["Stomach","A muscular organ that churns food and secretes acid and enzymes to digest it."],
+    ["Pepsin","A stomach enzyme that breaks down proteins."],
+    ["Lipase","An enzyme (from stomach and pancreas) that breaks down fats."],
+    ["HCl","Hydrochloric acid secreted by the stomach; kills bacteria and activates pepsin."],
+    ["Chyme","The semi-liquid mixture of partially digested food and gastric juices in the stomach."],
+    ["Pancreas","A gland that secretes digestive enzymes and hormones like insulin."],
+    ["Gallbladder","An organ that stores bile produced by the liver."],
+    ["Liver","The largest gland; produces bile, detoxifies blood, and performs many metabolic functions."],
+    ["Small Intestine","The long tube where most chemical digestion and nutrient absorption occurs."],
+    ["Villi/Microvilli","Tiny finger-like projections in the small intestine that increase surface area for absorption."],
+    ["Large Intestine/Colon","Absorbs water from indigestible food matter; forms and stores feces."],
+    ["Appendix","A small pouch attached to the large intestine; limited function in humans."],
+    ["Rectum/Anus","The final section of the large intestine that stores and expels feces."],
+    ["Kidneys","Organs that filter blood to form urine, regulating fluid and electrolyte balance."],
+    ["Nephron","The functional unit of the kidney that filters blood and produces urine."],
+    ["Ureters","Tubes that carry urine from the kidneys to the bladder."],
+    ["Bladder","A muscular sac that stores urine until it is expelled."],
+    ["Urethra","The tube through which urine exits the body."]
+  ],
+  "Circulatory & Lymphatic":[
+    ["Arteries","Blood vessels that carry blood away from the heart."],
+    ["Veins","Blood vessels that carry blood toward the heart."],
+    ["Capillaries","Tiny blood vessels where gas and nutrient exchange occurs between blood and tissues."],
+    ["Atrium","An upper chamber of the heart that receives incoming blood."],
+    ["Ventricle","A lower chamber of the heart that pumps blood out of the heart."],
+    ["Epicardium","The outermost layer of the heart wall."],
+    ["Myocardium","The thick muscular middle layer of the heart wall."],
+    ["Endocardium","The smooth inner lining of the heart chambers."],
+    ["Valves","Flaps in the heart and veins that prevent backflow of blood."],
+    ["Aorta","The largest artery; carries oxygenated blood from the left ventricle to the body."],
+    ["Pulmonary Circulation","Blood flow between the heart and lungs for gas exchange."],
+    ["Systemic Circulation","Blood flow between the heart and the rest of the body."],
+    ["Blood","The fluid connective tissue transporting O2, nutrients, wastes, and immune cells."],
+    ["Erythrocytes","Red blood cells; contain hemoglobin and carry oxygen."],
+    ["Leukocytes","White blood cells; part of the immune system."],
+    ["Plasma","The liquid component of blood, carrying proteins, nutrients, and wastes."],
+    ["Platelets","Cell fragments that help blood clot to prevent bleeding."],
+    ["Lymphatic Fluid","Fluid collected from tissues by the lymphatic system; returned to blood."],
+    ["Lymph Nodes","Small bean-shaped structures that filter lymph and harbor immune cells."],
+    ["Spleen","An organ that filters blood and recycles old red blood cells; part of immune defense."],
+    ["Tonsils","Lymphatic tissue in the throat that helps fight pathogens entering through the mouth/nose."],
+    ["Lymphatic Vessels","Tubes that carry lymph fluid back toward the bloodstream."]
+  ],
+  "Respiratory & Nervous":[
+    ["Gas Exchange","The diffusion of oxygen into the blood and carbon dioxide out at the alveoli."],
+    ["Pharynx","The throat; shared passage for air and food."],
+    ["Larynx","The voice box; contains vocal cords and connects pharynx to trachea."],
+    ["Trachea","The windpipe; carries air from the larynx to the bronchi."],
+    ["Bronchi","Airways branching from the trachea into each lung."],
+    ["Alveoli","Tiny air sacs in the lungs where gas exchange occurs."],
+    ["Lungs","The paired organs of respiration where oxygen is absorbed and CO2 released."],
+    ["Diaphragm","The dome-shaped muscle below the lungs that drives breathing."],
+    ["Inhalation","The process of drawing air into the lungs."],
+    ["Exhalation","The process of expelling air from the lungs."],
+    ["Intercostal Muscles","Muscles between the ribs that assist in breathing movements."],
+    ["Hemoglobin","The iron-containing protein in red blood cells that binds and transports oxygen."],
+    ["Central Nervous System","The brain and spinal cord; integrates and processes information."],
+    ["Peripheral Nervous System","All nerves outside the brain and spinal cord."],
+    ["Sensory Neuron","A neuron that carries signals from sensory receptors to the CNS."],
+    ["Interneuron","A neuron within the CNS that connects sensory and motor neurons."],
+    ["Motor Neuron","A neuron that carries signals from the CNS to muscles or glands."],
+    ["Reflex Response","A fast, automatic response to a stimulus that bypasses the brain."],
+    ["Brain","The main organ of the CNS; controls most body functions and thought."],
+    ["Cerebrum","The largest brain region; controls voluntary movement, thought, and senses."],
+    ["Cerebellum","Brain region that coordinates balance and fine motor control."],
+    ["Brain Stem","Connects the brain to the spinal cord; controls basic life functions like breathing."],
+    ["Spinal Cord","The nerve bundle in the vertebral column that relays signals between brain and body."],
+    ["Somatic Nervous System","The PNS division controlling voluntary skeletal muscles."],
+    ["Autonomic Nervous System","The PNS division controlling involuntary functions like heart rate and digestion."],
+    ["Sympathetic Nervous System","The 'fight-or-flight' division of the autonomic nervous system."],
+    ["Parasympathetic Nervous System","The 'rest-and-digest' division of the autonomic nervous system."],
+    ["Action Potential","A rapid electrical signal that travels along a neuron's axon."],
+    ["Membrane Potential","The electrical charge difference across a neuron's membrane."],
+    ["Synapse","The gap between two neurons where neurotransmitters are released."],
+    ["Neurotransmitter","A chemical messenger released at a synapse to transmit signals between neurons."],
+    ["Saltatory Conduction","Fast signal transmission in myelinated neurons, jumping between nodes."],
+    ["Continuous Conduction","Slower signal transmission along unmyelinated neurons."],
+    ["Myelin Sheath","A fatty insulating layer around axons that speeds up signal transmission."],
+    ["Neuroplasticity","The brain's ability to reorganize and form new neural connections."]
+  ],
+  "Muscular, Skeletal & Integumentary":[
+    ["Axial Skeleton","The central skeleton: skull, vertebral column, and rib cage."],
+    ["Appendicular Skeleton","The limb skeleton: arms, legs, shoulders, and hips."],
+    ["Osteoblast","A bone cell that builds and deposits new bone matrix."],
+    ["Osteoclast","A bone cell that breaks down and reabsorbs bone tissue."],
+    ["Periosteum","The tough outer membrane covering bone surfaces."],
+    ["Bone Marrow","Soft tissue inside bones; red marrow produces blood cells, yellow stores fat."],
+    ["Compact Bone","Dense outer layer of bone providing strength."],
+    ["Spongy Bone","Porous inner bone tissue that reduces weight and houses marrow."],
+    ["Joint","A site where two or more bones meet."],
+    ["Fibrous Joints","Immovable joints where bones are joined by fibrous tissue (e.g., skull sutures)."],
+    ["Cartilaginous Joints","Slightly movable joints connected by cartilage (e.g., intervertebral discs)."],
+    ["Synovial Joints","Freely movable joints with a fluid-filled cavity (e.g., knee, shoulder)."],
+    ["Ligament","Connective tissue that connects bone to bone at joints."],
+    ["Tendon","Connective tissue that connects muscle to bone."],
+    ["Agonist","The primary muscle that produces a movement."],
+    ["Antagonist","The muscle that opposes the agonist's action."],
+    ["Opposing Pairs","Muscle pairs (agonist/antagonist) that work together to control joint movement."],
+    ["Strain","An injury to a muscle or tendon from overstretching."],
+    ["Sprain","An injury to a ligament from overstretching or tearing."],
+    ["Fascicle","A bundle of muscle fibers wrapped in connective tissue."],
+    ["Muscle Fiber","A single muscle cell; contains myofibrils."],
+    ["Myofibrils","Cylindrical subunits of muscle fibers containing actin and myosin filaments."],
+    ["Myofilaments","The protein filaments (actin & myosin) that slide past each other during contraction."],
+    ["Epidermis","The outermost layer of skin; provides protection."],
+    ["Dermis","The layer of skin beneath the epidermis; contains glands, follicles, and nerves."],
+    ["Subcutaneous Tissue","The deepest skin layer; mostly fat, connecting skin to underlying muscle."],
+    ["Sebaceous Gland","Oil gland in the dermis that secretes sebum to lubricate skin and hair."],
+    ["Eccrine Gland","Sweat gland distributed all over the body; regulates temperature."],
+    ["Apocrine Gland","Sweat gland found in armpits and groin; secretes thicker fluid."],
+    ["Melanin","The pigment produced by melanocytes that gives skin its color and absorbs UV radiation."],
+    ["Keratin","A tough protein in skin, hair, and nails that provides protection."]
+  ],
+  "Endocrine & Immune":[
+    ["Hormone","A chemical messenger produced by an endocrine gland and released into the blood."],
+    ["Endocrine Gland","A ductless gland that secretes hormones directly into the bloodstream."],
+    ["Steroid Hormones","Lipid-based hormones derived from cholesterol that can enter cells directly."],
+    ["Target Cell","A cell with specific receptors that respond to a particular hormone."],
+    ["Hypothalamus","The brain region that links the nervous and endocrine systems; regulates pituitary."],
+    ["Pituitary Gland","The 'master gland' that releases hormones controlling other endocrine glands."],
+    ["Pineal Gland","A brain gland that secretes melatonin to regulate sleep-wake cycles."],
+    ["Thyroid Gland","Neck gland that secretes hormones regulating metabolism."],
+    ["Parathyroid Glands","Tiny glands on the thyroid that regulate blood calcium levels."],
+    ["Hyperthyroidism","Overproduction of thyroid hormone, causing increased metabolism and heart rate."],
+    ["Hypothyroidism","Underproduction of thyroid hormone, causing fatigue and slowed metabolism."],
+    ["Adrenal Glands","Glands atop the kidneys that secrete adrenaline and cortisol in stress response."],
+    ["Pancreas","Gland that secretes insulin and glucagon to regulate blood sugar."],
+    ["Insulin","A pancreatic hormone that lowers blood glucose by promoting cellular uptake."],
+    ["Glucagon","A pancreatic hormone that raises blood glucose by stimulating liver glycogen breakdown."],
+    ["Ovaries & Testes","Gonads that produce sex hormones (estrogen/progesterone and testosterone)."],
+    ["Pathogen","A disease-causing microorganism such as a virus, bacterium, or fungus."],
+    ["Antibody","A protein produced by B cells that binds specifically to a pathogen antigen."],
+    ["Innate Immune System","The non-specific, fast first line of immune defense."],
+    ["Adaptive Immune System","The specific, slower immune response that targets particular pathogens with memory."],
+    ["Phagocytes","White blood cells that engulf and destroy pathogens."],
+    ["Macrophages","Large phagocytes that engulf pathogens and present antigens to other immune cells."],
+    ["Neutrophils","The most common phagocyte; first responders to infection."],
+    ["Dendritic Cells","Cells that capture antigens and present them to T cells to activate the adaptive immune response."],
+    ["Natural Killer (NK) Cells","Innate lymphocytes that destroy infected or cancerous cells without prior sensitization."],
+    ["Basophils & Eosinophils","White blood cells involved in allergic reactions and fighting parasites."],
+    ["Mast Cells","Tissue cells that release histamine in allergic and inflammatory responses."],
+    ["B Cells","Lymphocytes that produce antibodies when activated."],
+    ["T Cells","Lymphocytes that directly kill infected cells (cytotoxic) or help coordinate immune responses (helper)."],
+    ["Vaccine","A preparation that stimulates the immune system to build memory against a pathogen without causing disease."],
+    ["Antibiotics","Drugs that kill or inhibit bacteria."],
+    ["Antibiotic Resistance","When bacteria evolve to survive antibiotic treatment, making infections harder to treat."]
+  ]
+};
+
+let unit = "Body Systems", mode = "flash", deck = [], idx = 0;
+let flipped = false, got = 0, miss = 0, mcAnswered = false, done = false;
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildDeck() {
+  deck = shuffle([...ALL[unit]]);
+  idx = 0; flipped = false; got = 0; miss = 0; mcAnswered = false; done = false;
+}
+
+// Populate unit selector
+const sel = document.getElementById("unitSel");
+Object.keys(ALL).forEach(u => {
+  const o = document.createElement("option");
+  o.value = o.textContent = u;
+  sel.appendChild(o);
+});
+sel.addEventListener("change", () => { unit = sel.value; buildDeck(); render(); });
+
+// Mode tabs
+document.querySelectorAll(".mode-tab").forEach(b => {
+  b.addEventListener("click", () => {
+    mode = b.dataset.mode;
+    document.querySelectorAll(".mode-tab").forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    buildDeck(); render();
+  });
+});
+
+document.getElementById("shuffleBtn").addEventListener("click", () => { buildDeck(); render(); });
+
+function updateStats() {
+  const total = deck.length;
+  const done_count = got + miss;
+  document.getElementById("progStat").textContent = done ? "Done!" : `${idx + 1} / ${total}`;
+  document.getElementById("gotStat").textContent = `✓ ${got}`;
+  document.getElementById("missStat").textContent = `↺ ${miss}`;
+  document.getElementById("progressBar").style.width = total ? `${(done_count / total) * 100}%` : "0%";
+}
+
+function render() {
+  updateStats();
+  const area = document.getElementById("cardArea");
+  area.innerHTML = "";
+  if (mode === "browse") { renderBrowse(area); return; }
+  if (done) { renderSummary(area); return; }
+  if (mode === "flash") renderFlash(area);
+  else renderMC(area);
+}
+
+function renderFlash(area) {
+  const [term, def] = deck[idx];
+
+  const scene = document.createElement("div");
+  scene.className = "flashcard-scene" + (flipped ? " flipped" : "");
+
+  const inner = document.createElement("div");
+  inner.className = "flashcard-inner";
+
+  const front = document.createElement("div");
+  front.className = "flashcard-face";
+  front.innerHTML = `
+    <div class="card-unit-tag">${unit}</div>
+    <div class="card-term">${term}</div>
+    <div class="flip-hint">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 8C2 11.3 4.7 14 8 14s6-2.7 6-6-2.7-6-6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M5 2l3 2-3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Click to flip
+    </div>
+  `;
+
+  const back = document.createElement("div");
+  back.className = "flashcard-face flashcard-back";
+  back.innerHTML = `
+    <div class="card-unit-tag">${unit}</div>
+    <div class="card-def">${def}</div>
+  `;
+
+  inner.appendChild(front);
+  inner.appendChild(back);
+  scene.appendChild(inner);
+  scene.addEventListener("click", () => { flipped = !flipped; render(); });
+  area.appendChild(scene);
+
+  if (flipped) {
+    const rr = document.createElement("div");
+    rr.className = "result-row";
+    rr.innerHTML = `<button class="btn teal">✓ Got it</button><button class="btn">↺ Keep reviewing</button>`;
+    rr.children[0].addEventListener("click", e => { e.stopPropagation(); got++; next(); });
+    rr.children[1].addEventListener("click", e => { e.stopPropagation(); miss++; next(); });
+    area.appendChild(rr);
+  }
+
+  const nav = document.createElement("div");
+  nav.className = "nav-row";
+  nav.innerHTML = `<button class="btn">← Prev</button><button class="btn" style="margin-left:auto">Skip →</button>`;
+  nav.children[0].addEventListener("click", () => { if (idx > 0) { idx--; flipped = false; render(); } });
+  nav.children[1].addEventListener("click", () => { miss++; next(); });
+  area.appendChild(nav);
+}
+
+function getWrongOpts(correct) {
+  return shuffle(ALL[unit].filter(x => x[0] !== correct[0])).slice(0, 3).map(x => x[1]);
+}
+
+const LETTERS = ["A", "B", "C", "D"];
+
+function renderMC(area) {
+  const [term, def] = deck[idx];
+  const card = document.createElement("div");
+  card.className = "mc-card";
+  card.innerHTML = `<div class="mc-unit-tag">${unit}</div><div class="mc-term">${term}</div>`;
+  area.appendChild(card);
+
+  const opts = shuffle([def, ...getWrongOpts(deck[idx])]);
+  const optsDiv = document.createElement("div");
+  optsDiv.className = "mc-opts";
+
+  opts.forEach((o, i) => {
+    const b = document.createElement("button");
+    b.className = "mc-opt";
+    b.innerHTML = `<span class="opt-letter">${LETTERS[i]}</span><span>${o}</span>`;
+    if (!mcAnswered) b.addEventListener("click", () => {
+      mcAnswered = true;
+      if (o === def) { got++; b.classList.add("correct"); }
+      else {
+        miss++; b.classList.add("wrong");
+        optsDiv.querySelectorAll(".mc-opt").forEach(x => {
+          if (x.querySelector("span:last-child").textContent === def) x.classList.add("correct");
+        });
+      }
+      optsDiv.querySelectorAll(".mc-opt").forEach(x => x.disabled = true);
+      updateStats();
+      const nb = document.createElement("button");
+      nb.className = "btn accent";
+      nb.textContent = "Next →";
+      nb.style.cssText = "margin-top:.75rem;align-self:flex-end;";
+      nb.addEventListener("click", next);
+      optsDiv.appendChild(nb);
+    });
+    optsDiv.appendChild(b);
+  });
+  area.appendChild(optsDiv);
+}
+
+function next() { idx++; flipped = false; mcAnswered = false; if (idx >= deck.length) done = true; render(); }
+
+function renderSummary(area) {
+  const pct = Math.round(got / deck.length * 100);
+  const s = document.createElement("div");
+  s.className = "summary";
+  s.innerHTML = `
+    <div class="summary-label">Round complete — ${unit}</div>
+    <div class="summary-score">${pct}%</div>
+    <div class="summary-sub">${got} of ${deck.length} correct</div>
+    <div class="summary-bar-wrap">
+      <div class="summary-bar-bg"><div class="summary-bar-fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="summary-row">
+      <button class="btn accent" id="restartBtn">Restart</button>
+      <button class="btn" id="missedBtn">Review missed only</button>
+    </div>
+  `;
+  s.querySelector("#restartBtn").addEventListener("click", () => { buildDeck(); render(); });
+  s.querySelector("#missedBtn").addEventListener("click", () => {
+    deck = shuffle(deck.slice(idx - miss, idx).concat(deck.slice(0, idx - miss).filter((_, i) => i >= got)));
+    if (!deck.length) { buildDeck(); render(); return; }
+    idx = 0; flipped = false; got = 0; miss = 0; mcAnswered = false; done = false;
+    render();
+  });
+  area.appendChild(s);
+}
+
+function renderBrowse(area) {
+  const grid = document.createElement("div");
+  grid.className = "browse-grid";
+  ALL[unit].forEach(([term, def]) => {
+    const item = document.createElement("div");
+    item.className = "browse-item";
+    item.innerHTML = `<div class="browse-term">${term}</div><div class="browse-def">${def}</div>`;
+    grid.appendChild(item);
+  });
+  area.appendChild(grid);
+}
+
+buildDeck();
+render();
+</script>
+</body>
+</html>
